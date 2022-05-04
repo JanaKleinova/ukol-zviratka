@@ -3,16 +3,19 @@ import './style.css';
 
 import Animal from '../Animal';
 
-const AnimalList = ({animals, selectAn, zprava}) => {
+const AnimalList = ({animals, selectAn}) => {
     
     return(
 
         <>
-            <div className="animal-list" onClick={() => { selectAn()}}>
+            <div className="animal-list">
 
                     {animals.map(item =>
 
-                    <Animal key={item.id} nazev={item.nazev} latin={item.nazevLatinsky} foto={item.foto}/>
+                    <div className='id_animal'>
+                        <Animal key={item.id} id={item.id} nazev={item.nazev} latin={item.nazevLatinsky} foto={item.foto} onSelect={selectAn}/>
+                    </div>
+                    
 
                     )}
 
