@@ -10,15 +10,15 @@ const App = () => {
 
   const [animals, setAnimals] = useState([]);
 
-  const [selectedAnimalId, setSelectedAnimalId] = useState();
+  const [selectedAnimalId, setSelectedAnimalId] = useState('');
 
   useEffect(
     () => {
         fetch('https://lrolecek.github.io/zviratka-api/zvirata.json')
         .then(response => response.json())
         .then(data => {
-        console.log(data);
         setAnimals(data.zvirata);
+        setSelectedAnimalId(data.zvirata[0])
         })
     },
     []
@@ -26,7 +26,8 @@ const App = () => {
   
   
     const selectAnimal = (id) => {
-      setSelectedAnimalId(animals[id]);
+      const animal = animals.find ((animal) => animal.id === id)
+      setSelectedAnimalId(animal);
     }
 
  
@@ -41,7 +42,7 @@ const App = () => {
          <AnimalList 
               animals={animals} selectAn={selectAnimal}/>
         
-        <AnimalDetail animal={animals[selectedAnimalId]} />
+        <AnimalDetail detailAnimal={selectedAnimalId} />
       </div>
     </>
   );
